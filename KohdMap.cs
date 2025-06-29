@@ -1,7 +1,7 @@
-﻿namespace KhodToSVG;
+﻿namespace KohdToSVG;
 using BKH.Geometry;
 
-internal class KhodMap
+internal class KohdMap
 {
     public const int OPEN_SQUARE = 0;
     public const int BLOCKED_SQUARE = -100;
@@ -10,7 +10,7 @@ internal class KhodMap
     public bool AgressivePathing { get; set; } = false; // For cleanup path.
 
     public Point2D EndPosition { get; set; }            // Target to pathfind to.
-    public List<Point2D> EndRing = [];                  // For a Khod node, this represents the closest we're allowed to get to the EndPosition, and the ultimate target.  
+    public List<Point2D> EndRing = [];                  // For a Kohd node, this represents the closest we're allowed to get to the EndPosition, and the ultimate target.  
     public List<Point2D> FinalPath = [];                // The path after a successful A_Star call. 
     public int MinSteps { get; set; } = 0;              // Used to ensure we have space for subnodes.
     public Point2D StartPosition { get; set; }          // Start for a single point start.
@@ -23,7 +23,7 @@ internal class KhodMap
     private readonly Dictionary<Point2D, (float gScore, float fScore, Point2D? parent)> _stepCounter = [];  // AStar step and path data
     private readonly Dictionary<Point2D, int> _theMap = [];     // this serves as our reference starting position for everything. 
 
-    public KhodMap(Globals config)
+    public KohdMap(Globals config)
     {
         _globalData = config;
 

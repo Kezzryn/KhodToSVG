@@ -1,4 +1,4 @@
-﻿namespace KhodToSVG;
+﻿namespace KohdToSVG;
 using BKH.Geometry;
 
 internal class Globals
@@ -11,7 +11,7 @@ internal class Globals
         string configFile = clp.GetStringArgument("configfile", 'c');
         if(configFile == String.Empty) 
         {
-            configFile = "khod.config";
+            configFile = "Kohd.config";
             Console.WriteLine("Using default config file.");
         }
 
@@ -28,7 +28,7 @@ internal class Globals
     //Global
     public string CacheDirectory { get; } = @"cache\";
     public bool DebugGrid { get; } = false;
-    public string DefaultOutput { get; } = "khod.html";
+    public string DefaultOutput { get; } = "Kohd.html";
     public bool Verbose { get; } = false;
     public bool UseCache { get; } = false;
     public bool EmbedSVG { get; } = true;
@@ -38,7 +38,7 @@ internal class Globals
     //default file names
     //word cache directory
 
-    //KhodWord
+    //KohdWord
     public int RADII_INCREASE = 7;
     public int DEFAULT_RADIUS = 20;
     // style sheets? 
@@ -54,7 +54,7 @@ internal class Globals
     public int MARGIN_Y { get; } = 130;
     public int MAPXY { get; } = 62;
 
-    //KhodMap
+    //KohdMap
     public int GridSize = 9;
 
     //Node

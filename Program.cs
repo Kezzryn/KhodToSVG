@@ -1,4 +1,4 @@
-﻿using KhodToSVG;
+﻿using KohdToSVG;
 using System.Diagnostics;
 using System.Text;
 
@@ -17,7 +17,7 @@ static void DisplayHelp()
 //lowercase everything 
 static string ValidateText(string text) => new string([.. text.Where(c => (char.IsLetter(c) || char.IsWhiteSpace(c)))]).ToLower();
 
-Dictionary<string, string> khodCache = [];
+Dictionary<string, string> KohdCache = [];
 
 try
 {
@@ -28,7 +28,7 @@ try
     DirectoryInfo dirInfo = Directory.CreateDirectory(globalData.CacheDirectory);
     foreach(FileInfo fi in dirInfo.EnumerateFiles())
     {
-        khodCache.Add(Path.GetFileNameWithoutExtension(fi.Name), fi.FullName);
+        KohdCache.Add(Path.GetFileNameWithoutExtension(fi.Name), fi.FullName);
     }
 
     if(args.Length == 0) DisplayHelp();
@@ -67,16 +67,16 @@ try
 
     if (globalData.UseCache)
     {
-        toBeTranslated = toBeTranslated.Except(khodCache.Keys);
+        toBeTranslated = toBeTranslated.Except(KohdCache.Keys);
     }
   
-    IEnumerable<KhodWord> translated = toBeTranslated.Select(x => new KhodWord(x, globalData)).AsParallel();
+    IEnumerable<KohdWord> translated = toBeTranslated.Select(x => new KohdWord(x, globalData)).AsParallel();
 
-    foreach(KhodWord s in translated)
+    foreach(KohdWord s in translated)
     {
-        khodCache.TryAdd(s.SourceWord, $"{globalData.CacheDirectory}{s.SourceWord}.svg");
+        KohdCache.TryAdd(s.SourceWord, $"{globalData.CacheDirectory}{s.SourceWord}.svg");
 
-        File.WriteAllText(khodCache[s.SourceWord], s.ToString());
+        File.WriteAllText(KohdCache[s.SourceWord], s.ToString());
     }
 
     const string HTML_HEADER = "<!DOCTYPE html>\n<html>\n<body>\n";
@@ -88,7 +88,7 @@ try
 
     foreach(string s in splitText)
     {
-        if(khodCache.TryGetValue(s, out string fname))
+        if(KohdCache.TryGetValue(s, out string fname))
         {
             sb.Append(File.ReadAllText(fname));
         }

@@ -1,4 +1,4 @@
-﻿namespace KhodToSVG;
+﻿namespace KohdToSVG;
 enum PresetTypes
 {
     Charge,

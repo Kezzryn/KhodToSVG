@@ -1,7 +1,7 @@
 ﻿using BKH.Geometry;
-namespace KhodToSVG;
+namespace KohdToSVG;
 
-internal class KhodWord
+internal class KohdWord
 {
     private static readonly Dictionary<int, List<char>> pos_to_char = new()
     {
@@ -48,20 +48,20 @@ internal class KhodWord
 
     private readonly List<Node> nodes = [];
 
-    private readonly KhodMap baseKhodMap;
+    private readonly KohdMap baseKohdMap;
 
     public string SourceWord { get; }
 
     private readonly Globals _globalData;
 
-    public KhodWord(string text, Globals globals)
+    public KohdWord(string text, Globals globals)
     {
         _globalData = globals;
 
         SourceWord = text;
 
         if (_globalData.Verbose) Console.WriteLine($"Beginning parse of {text}");
-        baseKhodMap = new(globals);
+        baseKohdMap = new(globals);
 
         foreach ((Point2D source, int sourcePos) in point_to_pos)
         {
@@ -94,18 +94,18 @@ internal class KhodWord
 
         //build charge
         Node firstLink = nodes.First();
-        firstLink.AddChargeLinkTrace(baseKhodMap);
+        firstLink.AddChargeLinkTrace(baseKohdMap);
 
         //build a ground.
         Node lastLink = nodes.Last();
-        lastLink.AddGroundLinkTrace(baseKhodMap);
+        lastLink.AddGroundLinkTrace(baseKohdMap);
 
         foreach (Node currentNode in nodes.Where(x => !x.IsGround).OrderBy(x => distance[x.POS][x.NextNode!.POS]))
         {
             //run each path on it's own.
-            if (baseKhodMap.A_Star(currentNode, currentNode.NextNode!))
+            if (baseKohdMap.A_Star(currentNode, currentNode.NextNode!))
             {
-                currentNode.GridPath = [.. baseKhodMap.FinalPath]; //make backup copy for possible unmarking later.
+                currentNode.GridPath = [.. baseKohdMap.FinalPath]; //make backup copy for possible unmarking later.
                 if (_globalData.Verbose) Console.WriteLine($"-- FinalPath found. {currentNode.GridPath.First()} to {currentNode.GridPath.Last()}");
             }
             else
@@ -117,7 +117,7 @@ internal class KhodWord
         //now that we have all the base paths, lay them on the map. 
         foreach (Node node in nodes.SkipLast(1))
         {
-            baseKhodMap.LayPath(node.GridPath);
+            baseKohdMap.LayPath(node.GridPath);
         }
         
         bool isDone;
@@ -130,15 +130,15 @@ internal class KhodWord
             foreach (Node node in nodes.Where(x => !x.IsGround))
             {
                 if (_globalData.Verbose) Console.WriteLine($" Testing: {node} to {(node.IsGround ? "Ground" : node.NextNode!)}");
-                if (node.GridPath.Any(x => baseKhodMap.MapValueAt(x) != 1))
+                if (node.GridPath.Any(x => baseKohdMap.MapValueAt(x) != 1))
                 {
                     //if (Verbose) Console.WriteLine($"--Cross Path!");
                     //try to do better
-                    if(baseKhodMap.A_Star(node, node.NextNode!))
+                    if(baseKohdMap.A_Star(node, node.NextNode!))
                     {
-                        baseKhodMap.StripPath(node.GridPath);
-                        node.GridPath = [.. baseKhodMap.FinalPath];
-                        baseKhodMap.LayPath(node.GridPath);
+                        baseKohdMap.StripPath(node.GridPath);
+                        node.GridPath = [.. baseKohdMap.FinalPath];
+                        baseKohdMap.LayPath(node.GridPath);
                         isDone = false;
                     }
                 }
@@ -152,16 +152,16 @@ internal class KhodWord
         } while (!isDone);
 
         //do cleanup step.
-        baseKhodMap.AgressivePathing = true;
+        baseKohdMap.AgressivePathing = true;
         for (int i = 0; i < 5; i++)
         {
             foreach (Node node in nodes.Where(x => !x.IsGround).OrderBy(x => x.GridPath.Count))
             {
-                baseKhodMap.StripPath(node.GridPath);
-                if (baseKhodMap.A_Star(node, node.NextNode!))
+                baseKohdMap.StripPath(node.GridPath);
+                if (baseKohdMap.A_Star(node, node.NextNode!))
                 {
-                    node.GridPath = [.. baseKhodMap.FinalPath];
-                    baseKhodMap.LayPath(node.GridPath);
+                    node.GridPath = [.. baseKohdMap.FinalPath];
+                    baseKohdMap.LayPath(node.GridPath);
                     isDone = false;
                 }
             }
@@ -219,19 +219,19 @@ internal class KhodWord
         foreach(int pos in nodes.Select(x => x.POS).Distinct())
         {
             Point2D gridNode = _globalData.WorldToGrid(NodePosition(pos));
-            baseKhodMap.MarkMap(gridNode, KhodMap.BLOCKED_SQUARE);
+            baseKohdMap.MarkMap(gridNode, KohdMap.BLOCKED_SQUARE);
 
             int maxRadius = nodes.Where(x => x.POS == pos).Max(r => r.Radius);
             int n_r = ((((maxRadius * 2) + _globalData.GridSize - 1) / _globalData.GridSize) - 1) / 2;
             foreach (Point2D n in gridNode.GetAllNeighbors(n_r))
             {
-                baseKhodMap.MarkMap(n, KhodMap.BLOCKED_SQUARE);
+                baseKohdMap.MarkMap(n, KohdMap.BLOCKED_SQUARE);
             }
 
             //List<Point2D> startPoints = [.. gridNode.GetNeighborsAtRadius(n_r + 1)];
             //foreach (Point2D n in startPoints)
             //{
-            //    baseKhodMap.MarkMap(n, KhodMap.SLOW_SQUARE);
+            //    baseKohdMap.MarkMap(n, KohdMap.SLOW_SQUARE);
             //}
 
             foreach (Node n in nodes.Where(x => x.POS == pos))
@@ -244,7 +244,7 @@ internal class KhodWord
     public override string ToString()
     {
         string grid = String.Empty;
-        if(_globalData.DebugGrid) grid = baseKhodMap.Debug_Grid();
+        if(_globalData.DebugGrid) grid = baseKohdMap.Debug_Grid();
 
         string body = string.Join("\n", nodes.Select(x => x.NodeSVG()));
         string nullNode = String.Empty;

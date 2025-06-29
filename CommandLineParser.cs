@@ -1,4 +1,4 @@
-﻿namespace KhodToSVG;
+﻿namespace KohdToSVG;
 internal class CommandLineParser(string[] args)
 {
     // https://stackoverflow.com/questions/43232740/parse-command-line-arguments-options-in-c-sharp

@@ -1,5 +1,5 @@
 ﻿using BKH.Geometry;
-namespace KhodToSVG;
+namespace KohdToSVG;
 
 internal class Node((int X, int Y) worldXY, int position, int radius, Globals globals)
 {
@@ -20,7 +20,7 @@ internal class Node((int X, int Y) worldXY, int position, int radius, Globals gl
     private readonly Globals _globalData = globals;
     private string _chargeLinkTrace = String.Empty;
 
-    public void AddChargeLinkTrace(KhodMap khodMap)
+    public void AddChargeLinkTrace(KohdMap KohdMap)
     {
         int offset = _globalData.GridSize / 2;
         int quarterOffset = _globalData.GridSize / 4;
@@ -68,13 +68,13 @@ internal class Node((int X, int Y) worldXY, int position, int radius, Globals gl
             cursorChargeNode.x += offset;
             pointList.Add(cursorChargeNode);
 
-            khodMap.MarkMap(startChargePos, KhodMap.BLOCKED_SQUARE);
-            khodMap.MarkMap(endChargePos, KhodMap.BLOCKED_SQUARE);
+            KohdMap.MarkMap(startChargePos, KohdMap.BLOCKED_SQUARE);
+            KohdMap.MarkMap(endChargePos, KohdMap.BLOCKED_SQUARE);
             foreach (Point2D p in from y in Enumerable.Range(-1, 3)
                                   from x in Enumerable.Range(1, 2)
                                   select startChargePos + new Point2D(x, y))
             {
-                khodMap.MarkMap(p, KhodMap.BLOCKED_SQUARE);
+                KohdMap.MarkMap(p, KohdMap.BLOCKED_SQUARE);
             }
         }
 
@@ -88,7 +88,7 @@ internal class Node((int X, int Y) worldXY, int position, int radius, Globals gl
         }
     }
 
-    public void AddGroundLinkTrace(KhodMap khodMap)
+    public void AddGroundLinkTrace(KohdMap KohdMap)
     {
         int offset = _globalData.GridSize / 2;
         int step = EdgePoints.Min(x => Point2D.TaxiDistance2D(GridXY, x));
@@ -116,14 +116,14 @@ internal class Node((int X, int Y) worldXY, int position, int radius, Globals gl
 
         foreach (Point2D p in GridPath)
         {
-            khodMap.MarkMap(p, KhodMap.BLOCKED_SQUARE);
+            KohdMap.MarkMap(p, KohdMap.BLOCKED_SQUARE);
         }
     }
 
     public void GenerateStartPoints(int maxRadius)
     {
         //not perfect, we lose a few at the corners. Something for Future Me.
-        //int n_r = ((((maxRadius  * 2) + KhodMap.GRID_SIZE - 1) / KhodMap.GRID_SIZE) - 1) / 2;
+        //int n_r = ((((maxRadius  * 2) + KohdMap.GRID_SIZE - 1) / KohdMap.GRID_SIZE) - 1) / 2;
         EdgePoints = [.. GridXY.GetNeighborsAtRadius(maxRadius)];
     }
 

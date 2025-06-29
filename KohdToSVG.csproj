@@ -6,12 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Title>Khod to SVG</Title>
+    <Title>Kohd to SVG</Title>
 	<VersionPrefix>0.0.1</VersionPrefix>
 	<Company>Stupid Horse Software</Company>
 	<Authors>Kezzryn</Authors>
-	<Product>Khod to SVG</Product>
-	<Description>A tool for the Daggerheart RPG to generate Khod glyphs for the Motherboard campaign frame.</Description>
+	<Product>Kohd to SVG</Product>
+	<Description>A tool for the Daggerheart RPG to generate Kohd glyphs for the Motherboard campaign frame.</Description>
 	<Copyright></Copyright>
   </PropertyGroup>
 
