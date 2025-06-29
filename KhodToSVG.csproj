@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Title>Khod to SVG</Title>
+	<VersionPrefix>0.0.1</VersionPrefix>
+	<Company>Stupid Horse Software</Company>
+	<Authors>Kezzryn</Authors>
+	<Product>Khod to SVG</Product>
+	<Description>A tool for the Daggerheart RPG to generate Khod glyphs for the Motherboard campaign frame.</Description>
+	<Copyright></Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+
+</Project>
