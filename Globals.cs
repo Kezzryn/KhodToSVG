@@ -34,6 +34,7 @@ internal class Globals
     public bool EmbedSVG { get; } = true;
     public bool NotSilent { get; } = true;
 
+    public int PathfindLoops { get; } = 200;
     //default file names
     //word cache directory
 

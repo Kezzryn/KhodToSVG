@@ -144,7 +144,7 @@ internal class KhodWord
                 }
             }
 
-            if (saftey > 1000)
+            if (saftey > _globalData.PathfindLoops)
             {
                 if (_globalData.Verbose) Console.WriteLine("Safety triggered");
                 isDone = true;
