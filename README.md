@@ -1,4 +1,4 @@
-### Daggerheart Khod to Scalable Vector Graphic
+# Daggerheart Khod to Scalable Vector Graphic
 
 This is a command line tool to generate Khod word glyphs in .svg format.
 
@@ -14,16 +14,16 @@ Khod was craeted by [u/Admire_the_Cipher](https://www.reddit.com/user/Admire_the
 
 ## Features and Limitations
 
-# Rolling With Hope
+### Rolling With Hope
 I've proven the core concept and can create most glyphs. More complicated ones may timeout. A Khod-glyph will always be generated, but some complicated words may have traces that cross over other paths.
 
 All generated Khod-glyphs are saved as SVG files that can be edited in a graphics editor.
 
-# Rolling With Fear
+### Rolling With Fear
 There are pathfinding annoyances that need to be smoothed out. 
 Complicated Khod-glyphs may not fully path properly.
 
-# Future adventures
+## Future adventures
 This software is NOT feature complete. This is an initial proof of concept that's now in a state I'm comfortable to share.
 
 Things to do in no particular order:
@@ -43,14 +43,12 @@ Things to do in no particular order:
 * Performance and pathfinding optimizations
 * Better (or rather any) pathfinding loop detection and timeouts
 
-
-### Installing
+## Installing
 Note: The program is built for Windows with an x64 CPU.
 
 Extract the zip file to a folder. The zip files contains a single executable file.
 
-
-### Executing program
+## Executing program
 
 Double click the executable to run.
 -or- 
@@ -59,7 +57,7 @@ khodtosvg can be invoked from the command line.
 Command line example: 
 `'c:\temp\>khodtosvg -f "output_file.html" -t "text to translate"`
 
-# Command line Switches 
+### Command line Switches 
 ```
 Filename to output to: -f "output_file.html" 
 Text to translate: -t "text to translate"
@@ -67,7 +65,7 @@ Help: -h
 Stopwatch: -s
 ```
 
-# Notes
+### Notes
 The program will create a `cache` folder and output individual `.svg` files into that folder. It will use the contents of this folder to avoid re-generating Khod-gylphs.
 
 
